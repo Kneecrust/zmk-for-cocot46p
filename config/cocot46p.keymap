@@ -48,7 +48,6 @@
             quick-tap-ms = <0>;
         };
 
-        // Swapper for smart alt+tab
         swapper: swapper {
             compatible = "zmk,behavior-smart-toggle";
             #binding-cells = <0>;
