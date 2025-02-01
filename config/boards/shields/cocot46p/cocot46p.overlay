@@ -100,7 +100,7 @@
         /*automouse-layer = <2>;*/
         /*scroll_layer*/
         /*default is <1>~<4>*/
-        scroll-layers = <1>;
+        scroll-layers = <5>;
         /*snipe_layer*/
         /*default is <1>~<4>*/
         snipe-layers = <4>;

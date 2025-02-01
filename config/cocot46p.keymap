@@ -24,7 +24,7 @@
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            quick-tap-ms = <180>;
+            quick-tap-ms = <150>;
             flavor = "tap-preferred";
         };
 
@@ -47,46 +47,54 @@
             tapping-term-ms = <135>;
             quick-tap-ms = <0>;
         };
+
+        // Swapper for smart alt+tab
+        swapper: swapper {
+            compatible = "zmk,behavior-smart-toggle";
+            #binding-cells = <0>;
+            bindings = <&kp LGUI>, <&kp TAB>;
+            ignored-key-positions = <SWP_POS RM1 RM2 RM3 RT2>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        Qwer {
+        BASE {
             bindings = <
-&kp ESCAPE      &kp Q  &kp W  &kp E      &kp R         &kp T                              &kp Y        &kp U     &kp I          &kp O       &kp P          &kp BSPC
-&kp TAB         &kp A  &kp S  &kp D      &kp F         &kp G                              &kp H        &kp J     &kp K          &kp L       &kp SEMICOLON  &kp ENTER
-&kp LEFT_SHIFT  &kp Z  &kp X  &kp C      &kp V         &kp B        &mkp LCLK  &mkp RCLK  &kp N        &kp M     &kp COMMA      &kp PERIOD  &kp SLASH      &kp DELETE
-                              &kp LCTRL  &kp LEFT_ALT  &lt 1 SPACE  &mo 3      &mo 4      &lt 2 SPACE  &kp RALT  &kp RIGHT_WIN  &kp C_MUTE
+&kp TAB         &kp Q        &kp W       &kp E       &kp R         &kp T                              &kp Y        &kp U         &kp I        &kp O       &kp P                &kp BSPC
+&kp CAPS        &hm LCTRL A  &hm LALT S  &hm LGUI D  &hm LSHFT F   &kp G                              &kp H        &hm RSHFT J   &hm RGUI K   &hm RALT L  &hm RCTRL SEMICOLON  &kp SQT
+&kp LEFT_SHIFT  &kp Z        &kp X       &kp C       &kp V         &kp B        &mkp LCLK  &mkp RCLK  &kp N        &kp M         &kp COMMA    &kp PERIOD  &kp SLASH            &kp MINUS
+                                         &kp LCTRL   &kp LEFT_ALT  &lt 1 SPACE  &mo 3      &swapper   &lt 2 ENTER  &lt 2 ENTER   &kp ESC        
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
-            label = "Qwer";
+            label = "BASE";
         };
 
-        Lower {
+        SYM {
             bindings = <
-&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5                   &kp NUMBER_6  &kp N7     &kp N8     &kp N9  &kp N0   &trans
-&trans  &trans        &trans        &trans        &trans        &kp F12                  &kp MINUS     &kp EQUAL  &kp GRAVE  &trans  &kp SQT  &trans
-&trans  &trans        &trans        &trans        &trans        &trans   &trans  &trans  &trans        &trans     &trans     &trans  &trans   &trans
+&trans  &kp GRAVE     &kp CARET     &kp POUND     &kp AMPS      &kp PIPE                 &kp PLUS      &kp LBRC   &kp RBRC   &kp N9  &kp N0   &trans
+&trans  &kp EXCL      &kp QMARK     &kp COLON     &kp EQUAL     &kp DLLR                 &kp MINUS     &kp LPAR   &kp RPAR   &kp LT  &kp GT   &trans
+&trans  &kp PRCNT     &kp QMARK     &kp STAR      &kp PLUS      &kp BSLH &trans  &trans  &kp AT        &kp LBKT   &kp RBKT   &trans  &trans   &trans
                                     &trans        &trans        &trans   &trans  &trans  &kp RSHFT     &trans     &trans     &trans
             >;
 
-            label = "Lower";
+            label = "SYM";
         };
 
-        Raise {
+        NUM {
             bindings = <
-&kp KP_NUM     &kp ESC   &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0                  &trans  &trans    &kp UP_ARROW    &trans     &trans  &trans
-&kp PAGE_UP    &kp CAPS  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp AT_SIGN                      &trans  &kp LEFT  &kp DOWN_ARROW  &kp RIGHT  &trans  &trans
-&kp PAGE_DOWN  &kp DEL   &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_DOT       &trans  &trans  &trans  &trans    &trans          &trans     &trans  &trans
-                                          &trans           &trans           &trans           &trans  &trans  &trans  &trans    &trans          &trans
+&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5                  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans 
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
 
-            label = "Raise";
+            label = "NUM";
         };
 
-        Setting {
+        SET {
             bindings = <
 &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &ext_power EP_ON                   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR
 &rgb_ug RGB_HUI  &rgb_ug RGB_HUD  &trans           &trans           &trans           &ext_power EP_OFF                  &trans        &trans        &trans        &trans        &trans        &bt BT_CLR_ALL
@@ -94,10 +102,10 @@
                                                    &trans           &trans           &trans             &trans  &trans  &trans        &trans        &trans        &trans
             >;
 
-            label = "Setting";
+            label = "SET";
         };
 
-        Snipe {
+        SNIP {
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans
@@ -105,7 +113,18 @@
                         &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans
             >;
 
-            label = "Snipe";
+            label = "SNIP";
+        };
+
+        SCRL {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans 
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+
+            label = "SCRL";
         };
     };
 };
